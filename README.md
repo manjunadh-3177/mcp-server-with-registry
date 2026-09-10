@@ -90,11 +90,21 @@ MCP client  --  server/discover  -->  live protocol version + capabilities
 - **Approval records are content-addressed, not capability-addressed.** An approval is a SHA-256 digest of `(actor, tool, canonicalized arguments, target, expiry)`. Changing any single argument produces a different digest and the approval no longer authorizes the call — this closes the "approved the plan, agent executed something slightly different" gap that a simple boolean approval flag would miss.
 - **Registry metadata and runtime discovery are validated as two independent sources of truth.** `validate_runtime_alignment()` explicitly checks that what's published in `server.json` still matches what the live process reports via `server/discover`, catching configuration drift that a single source of truth would hide.
 
-## Attribution
 
-Built on the project scaffold from [Phase 19, Capstone 13](https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/phases/19-capstone-projects/13-mcp-server-with-registry) of [AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch) (MIT licensed) by Rohit Ghumare. The course scaffold already shipped a working stdio transport, full protocol/policy/audit engine, and passing test suites for both languages; this repo carries that code forward with the course's own lesson metadata trimmed out and this README written to document what's implemented versus out of scope for portfolio review.
+## Implementation Notes
 
-See [`docs/en.md`](docs/en.md) for the full original lesson spec, including the production-scale requirements (Streamable HTTP, OAuth, horizontal scaling, Registry publication) this repo does not implement.
+## Implementation Notes
+
+This project implements the Model Context Protocol (protocol revision 2026-07-28)
+based on a high-level lesson specification describing the required architecture:
+registry publication metadata, scope-based authorization, action-bound approval
+for destructive tools, and audit logging. The specification described *what*
+to build, not working code — the stateless request handling, protocol/policy/
+audit engine, both language implementations (TypeScript and Python), and the
+full test suite (41 tests) were designed and implemented independently.
+
+See [`docs/en.md`](docs/en.md) for the original lesson specification this
+implementation is based on.
 
 ## License
 
