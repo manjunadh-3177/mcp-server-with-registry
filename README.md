@@ -91,7 +91,6 @@ MCP client  --  server/discover  -->  live protocol version + capabilities
 - **Registry metadata and runtime discovery are validated as two independent sources of truth.** `validate_runtime_alignment()` explicitly checks that what's published in `server.json` still matches what the live process reports via `server/discover`, catching configuration drift that a single source of truth would hide.
 
 
-## Implementation Notes
 
 ## Implementation Notes
 
